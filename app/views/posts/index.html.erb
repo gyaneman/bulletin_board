@@ -1,0 +1,27 @@
+<h1> Bulletin_board!! </h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Comment</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.message %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= form_for @newPost, :url => {:action => 'create'} do |p| %>
+  name:
+  <%= p.text_field :name %> <br>
+  email:
+  <%= p.email_field :email %> <br>
+  message:
+  <%= p.text_area :message %> <br>
+  <%= p.submit "Submit" %>
+<% end %>
