@@ -1,4 +1,4 @@
-<h1> Bulletin_board!! </h1>
+<h1> Bulletin_board!! (<%= @numOfPosts %>)</h1>
 
 <table>
   <tr>
@@ -7,11 +7,11 @@
     <th>Comment</th>
   </tr>
 
-<% @users.each do |user| %>
+<% @posts.reverse_each do |p| %>
   <tr>
-    <td><%= user.name %></td>
-    <td><%= user.email %></td>
-    <td><%= user.message %></td>
+    <td><%= p.name %></td>
+    <td><%= p.email %></td>
+    <td><%= p.message %></td>
   </tr>
 <% end %>
 </table>

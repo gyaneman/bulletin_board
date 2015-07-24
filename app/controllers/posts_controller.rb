@@ -1,11 +1,9 @@
 class PostsController < ApplicationController
   def index
-    @users = Post.all
+    indexPage = params[:page]
+    @posts = Post.order(created_at: :desc).offset(indexPage).limit(100)
+    @numOfPosts = @posts.count
     @newPost = Post.new
-  end
-
-  def new
-
   end
 
   def create
@@ -19,6 +17,6 @@ class PostsController < ApplicationController
 
   private
     def newPost_params
-      params.require(:post).permit(:name, :email, :message)
+      return params.require(:post).permit(:name, :email, :message)
     end
 end
