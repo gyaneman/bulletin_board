@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
+
   def index
-    indexPage = params[:page]
-    @posts = Post.order(created_at: :desc).offset(indexPage).limit(100)
+    indexOffset = if params[:page] != nil && params[:page] >= 0 then
+      ((params[:page] - 1) * 100)
+    else
+      0
+    end
+    @posts = Post.order(created_at: :desc).offset(indexOffset).limit(100)
     @numOfPosts = @posts.count
     @newPost = Post.new
   end
@@ -13,6 +18,10 @@ class PostsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def new
+
   end
 
   private
